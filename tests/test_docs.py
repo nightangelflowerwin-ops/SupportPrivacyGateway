@@ -39,5 +39,5 @@ def test_relative_links_resolve(doc):
 def test_slugs_follow_github_rules(tmp_path):
     md = tmp_path / "x.md"
     md.write_text("## 4.1 First model (weeks 1–3)\n```\n# not a heading\n```\n"
-                  "## Appendix B. Reproducing\n")  # fmt: skip
+                  "## Appendix B. Reproducing\n", encoding="utf-8")  # fmt: skip
     assert slugs(md) == {"41-first-model-weeks-13", "appendix-b-reproducing"}

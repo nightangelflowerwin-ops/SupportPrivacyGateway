@@ -75,7 +75,7 @@ class ChatMessage(BaseModel):
 
 class ProxyRequest(BaseModel):
     messages: list[ChatMessage] = Field(min_length=1, max_length=100)
-    policy: str = "analytics"  # pseudonymises, so the reply's tokens can be restored
+    policy: str = "private"  # pseudonymises every detected label for external calls
     tenant: str = "default"
     conversation_id: str | None = None
     model: str | None = None
@@ -92,12 +92,18 @@ def _env_upstream() -> httpx.Client | None:
 
 def _env_detector() -> Detector | None:
     kind = os.environ.get("PII_DETECTOR", "validators")
-    if kind not in ("lora", "remote"):
+    if kind == "validators":
         return None
+    if kind not in ("lora", "remote", "presidio", "gliner_nvidia", "gliner_knowledgator"):
+        raise ValueError("unknown detector configuration")
     from pii_gateway.detectors.registry import build
 
     if kind == "remote":
+        if os.environ.get("PII_ALLOW_REMOTE_DETECTOR") != "1":
+            raise ValueError("remote detection sends raw text; explicit opt-in required")
         return build("lora_remote")
+    if kind != "lora":
+        return build(kind)
     return build("lora", adapter=os.environ["PII_ADAPTER"])
 
 
@@ -133,7 +139,7 @@ def create_app(detector: Detector | None = None, vault: Vault | None = None,
         try:
             return Policy.load(name)
         except ValueError as e:
-            raise HTTPException(400, str(e)) from e
+            raise HTTPException(400, "invalid or unknown policy") from e
 
     def check_api_key(x_api_key: str | None = Header(default=None)) -> None:
         key = app.state.api_key
@@ -159,10 +165,10 @@ def create_app(detector: Detector | None = None, vault: Vault | None = None,
         try:
             result = redact_text(req.text, policy, req.tenant, conversation)
         except Exception as e:  # noqa: BLE001 - fail closed, whatever went wrong
-            log.error("redact failed: %s (tenant=%s)", type(e).__name__, req.tenant)
+            log.error("redact failed: %s", type(e).__name__)
             raise HTTPException(503, "detection unavailable; nothing was returned") from None
-        log.info("redact tenant=%s conversation=%s policy=%s entities=%d labels=%s",
-                 req.tenant, conversation, policy.name, len(result.entities),
+        log.info("redact policy=%s entities=%d labels=%s",
+                 policy.name, len(result.entities),
                  sorted({e["label"] for e in result.entities}))  # fmt: skip
         return {"redacted": result.text, "entities": result.entities,
                 "policy": policy.name, "conversation_id": conversation}  # fmt: skip
@@ -175,8 +181,7 @@ def create_app(detector: Detector | None = None, vault: Vault | None = None,
             text, n = vault.restore(req.tenant, req.conversation_id, req.text)
         except VaultError:
             raise HTTPException(409, "vault error") from None
-        log.info("AUDIT restore tenant=%s conversation=%s tokens=%d",
-                 req.tenant, req.conversation_id, n)  # fmt: skip
+        log.info("AUDIT restore tokens=%d", n)
         return {"restored": text, "tokens_restored": n}
 
     @app.post("/proxy", dependencies=[Depends(check_api_key)])
@@ -184,12 +189,16 @@ def create_app(detector: Detector | None = None, vault: Vault | None = None,
         if upstream is None:
             raise HTTPException(404, "proxy is disabled (PII_UPSTREAM_URL not set)")
         policy = load_policy(req.policy)
+        if gateway.detector is None:
+            raise HTTPException(503, "proxy requires a contextual detector")
+        if policy.default == "keep" or "keep" in policy.labels.values():
+            raise HTTPException(400, "proxy rejects policies that keep personal information")
         conversation = req.conversation_id or uuid.uuid4().hex
         try:  # redact everything first; nothing leaves the gateway if any message fails
             results = [redact_text(m.content, policy, req.tenant, conversation)
                        for m in req.messages]  # fmt: skip
         except Exception as e:  # noqa: BLE001 - fail closed: the upstream is never called
-            log.error("proxy redact failed: %s (tenant=%s)", type(e).__name__, req.tenant)
+            log.error("proxy redact failed: %s", type(e).__name__)
             raise HTTPException(503, "detection unavailable; nothing was forwarded") from None
         body = {"model": req.model or upstream_model,
                 "messages": [{"role": m.role, "content": r.text}
@@ -204,8 +213,8 @@ def create_app(detector: Detector | None = None, vault: Vault | None = None,
             raise HTTPException(502, "upstream LLM unavailable") from None
         restored, n = vault.restore(req.tenant, conversation, reply) if vault else (reply, 0)
         entities = [r.entities for r in results]
-        log.info("AUDIT proxy tenant=%s conversation=%s messages=%d entities=%d "
-                 "tokens_restored=%d upstream=%s", req.tenant, conversation, len(results),
+        log.info("AUDIT proxy messages=%d entities=%d "
+                 "tokens_restored=%d upstream=%s", len(results),
                  sum(len(e) for e in entities), n, host)  # fmt: skip
         return {"reply": restored, "conversation_id": conversation, "policy": policy.name,
                 "entities": entities}  # fmt: skip

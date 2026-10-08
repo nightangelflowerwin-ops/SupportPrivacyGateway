@@ -12,7 +12,6 @@ from __future__ import annotations
 import argparse
 import json
 import platform
-import resource
 import subprocess
 import sys
 import time
@@ -60,7 +59,12 @@ def git_sha() -> str | None:
         return None
 
 
-def peak_rss_mb() -> float:
+def peak_rss_mb() -> float | None:
+    try:
+        import resource
+    except ImportError:
+        # Windows has no resource module; do not invent a zero memory measurement.
+        return None
     r = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
     return r / 2**20 if sys.platform == "darwin" else r / 2**10  # bytes on macOS, KiB on Linux
 
@@ -231,7 +235,7 @@ def main(argv: list[str] | None = None) -> list[Path]:
                     "python": platform.python_version(),
                     "git_sha": git_sha(),
                     "model_load_s": round(load_s, 2),
-                    "peak_rss_mb": round(peak_rss_mb(), 1),
+                    "peak_rss_mb": round(rss, 1) if (rss := peak_rss_mb()) is not None else None,
                     "timestamp": datetime.now(UTC).isoformat(timespec="seconds"),
                 },
             }

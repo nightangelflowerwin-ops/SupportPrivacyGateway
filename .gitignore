@@ -27,3 +27,5 @@ checkpoints/
 .env
 docker/gateway.env
 space/dist/
+
+work/

@@ -10,7 +10,7 @@ FIX = Path(__file__).parent / "fixtures"
 
 
 def test_convert_raw_rows():
-    rows = [json.loads(line) for line in (FIX / "openpii_raw_sample.jsonl").open()]
+    rows = [json.loads(line) for line in (FIX / "openpii_raw_sample.jsonl").open(encoding="utf-8")]
     for row in rows:
         ex, errs = convert_row(row)
         assert errs == []

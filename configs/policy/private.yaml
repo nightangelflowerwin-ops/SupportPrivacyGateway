@@ -1,0 +1,3 @@
+# Added by SupportPrivacyGateway: replace every detected label, restore via vault.
+default: pseudonymize
+labels: {}
