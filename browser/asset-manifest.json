@@ -1,0 +1,55 @@
+{
+  "model": "Xenova/bert-base-NER",
+  "model_revision": "8e892123e8b7c2c0c2bd1dcb598b7d244c4e53aa",
+  "model_license": "MIT",
+  "files": [
+    {
+      "path": "models/Xenova/bert-base-NER/config.json",
+      "bytes": 999,
+      "sha256": "a73a2eccc921bbdea95a94b49a157d3694b5c2abbae7a6f3000e14404a9c31a8",
+      "source": "https://huggingface.co/Xenova/bert-base-NER/resolve/8e892123e8b7c2c0c2bd1dcb598b7d244c4e53aa/config.json"
+    },
+    {
+      "path": "models/Xenova/bert-base-NER/tokenizer.json",
+      "bytes": 668923,
+      "sha256": "343989712a36cd8b253efeaf8baf6a08b9d2583f78e395e83832e8ee9f8d8ee1",
+      "source": "https://huggingface.co/Xenova/bert-base-NER/resolve/8e892123e8b7c2c0c2bd1dcb598b7d244c4e53aa/tokenizer.json"
+    },
+    {
+      "path": "models/Xenova/bert-base-NER/tokenizer_config.json",
+      "bytes": 385,
+      "sha256": "5be1a180e9badb4811a6c31502d70fb35a085af5457982937419c42d7530bae6",
+      "source": "https://huggingface.co/Xenova/bert-base-NER/resolve/8e892123e8b7c2c0c2bd1dcb598b7d244c4e53aa/tokenizer_config.json"
+    },
+    {
+      "path": "models/Xenova/bert-base-NER/special_tokens_map.json",
+      "bytes": 125,
+      "sha256": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3",
+      "source": "https://huggingface.co/Xenova/bert-base-NER/resolve/8e892123e8b7c2c0c2bd1dcb598b7d244c4e53aa/special_tokens_map.json"
+    },
+    {
+      "path": "models/Xenova/bert-base-NER/vocab.txt",
+      "bytes": 213450,
+      "sha256": "eeaa9875b23b04b4c54ef759d03db9d1ba1554838f8fb26c5d96fa551df93d02",
+      "source": "https://huggingface.co/Xenova/bert-base-NER/resolve/8e892123e8b7c2c0c2bd1dcb598b7d244c4e53aa/vocab.txt"
+    },
+    {
+      "path": "models/Xenova/bert-base-NER/onnx/model_quantized.onnx",
+      "bytes": 108952255,
+      "sha256": "caaee70a5518ec7f9e46e5308fcc9263a8c227703a9ce46cf61c69a552349648",
+      "source": "https://huggingface.co/Xenova/bert-base-NER/resolve/8e892123e8b7c2c0c2bd1dcb598b7d244c4e53aa/onnx/model_quantized.onnx"
+    },
+    {
+      "path": "ocr/lang/eng.traineddata.gz",
+      "bytes": 2952873,
+      "sha256": "45b4cb346724ac1774f1c36f42f182b887bcdb28ebe63e6fff90ac41f3fcff91",
+      "source": "https://cdn.jsdelivr.net/npm/@tesseract.js-data/eng@1.0.0/4.0.0_best_int/eng.traineddata.gz"
+    },
+    {
+      "path": "ocr/lang/swa.traineddata.gz",
+      "bytes": 1094930,
+      "sha256": "74c7bd51f173a3f174fbc8aaf8738819aa36000566857929ba6679ad5a2cf71f",
+      "source": "https://cdn.jsdelivr.net/npm/@tesseract.js-data/swa@1.0.0/4.0.0_best_int/swa.traineddata.gz"
+    }
+  ]
+}

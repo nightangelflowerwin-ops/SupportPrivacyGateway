@@ -1,0 +1,9 @@
+node_modules/
+node_modules-old/
+dist/
+public/models/
+public/runtime/
+public/ocr/
+public/pdfjs/
+public/fixtures/
+work/

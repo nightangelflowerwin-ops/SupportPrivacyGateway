@@ -1,0 +1,26 @@
+{
+  "name": "support-privacy-browser",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run build && vite preview --host 127.0.0.1 --port 8767 --strictPort",
+    "build": "tsc --noEmit && vite build",
+    "test": "vitest run",
+    "assets": "node scripts/prepare-assets.mjs",
+    "benchmark": "node scripts/benchmark.mjs"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "4.3.1",
+    "libphonenumber-js": "^1.12.24",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "6.4.299",
+    "tesseract.js": "7.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.8",
+    "typescript": "^5.9.3",
+    "vite": "8.3.4",
+    "vitest": "5.0.3"
+  }
+}

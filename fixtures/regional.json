@@ -1,0 +1,110 @@
+[
+  {
+    "id": "mixed",
+    "language": "en+swa",
+    "text": "My name is Sarah Johnson. Jina langu ni Amina Wanjiku. Email amina@example.com. Simu +254 712 345 678.",
+    "spans": [
+      {
+        "start": 11,
+        "end": 24,
+        "value": "Sarah Johnson"
+      },
+      {
+        "start": 40,
+        "end": 53,
+        "value": "Amina Wanjiku"
+      },
+      {
+        "start": 61,
+        "end": 78,
+        "value": "amina@example.com"
+      },
+      {
+        "start": 85,
+        "end": 101,
+        "value": "+254 712 345 678"
+      }
+    ]
+  },
+  {
+    "id": "regional",
+    "language": "swa",
+    "text": "Kitambulisho: 12345678. KRA PIN A123456789Z. M-PESA ref QAB12CD345.",
+    "spans": [
+      {
+        "start": 14,
+        "end": 22,
+        "value": "12345678"
+      },
+      {
+        "start": 32,
+        "end": 43,
+        "value": "A123456789Z"
+      },
+      {
+        "start": 56,
+        "end": 66,
+        "value": "QAB12CD345"
+      }
+    ]
+  },
+  {
+    "id": "spoken",
+    "language": "swa",
+    "text": "Simu sifuri saba moja mbili tatu nne tano sita saba nane",
+    "spans": [
+      {
+        "start": 5,
+        "end": 56,
+        "value": "sifuri saba moja mbili tatu nne tano sita saba nane"
+      }
+    ]
+  },
+  {
+    "id": "unicode",
+    "language": "en",
+    "text": "Hello 😀 mail a​mina@example.com. Card ４１１１ １１１１ １１１１ １１１１.",
+    "spans": [
+      {
+        "start": 14,
+        "end": 32,
+        "value": "a​mina@example.com"
+      },
+      {
+        "start": 39,
+        "end": 58,
+        "value": "４１１１ １１１１ １１１１ １１１１"
+      }
+    ]
+  },
+  {
+    "id": "negative",
+    "language": "en",
+    "text": "Order 12345678. Card 4111 1111 1111 1112. IP 999.1.2.3.",
+    "spans": []
+  },
+  {
+    "id": "unprompted-name",
+    "language": "en",
+    "text": "Please contact Amina Wanjiku about the shipment.",
+    "spans": [
+      {
+        "start": 15,
+        "end": 28,
+        "value": "Amina Wanjiku"
+      }
+    ]
+  },
+  {
+    "id": "unprompted-address",
+    "language": "en",
+    "text": "Deliver to 12 Fictional Lane tomorrow.",
+    "spans": [
+      {
+        "start": 11,
+        "end": 28,
+        "value": "12 Fictional Lane"
+      }
+    ]
+  }
+]
