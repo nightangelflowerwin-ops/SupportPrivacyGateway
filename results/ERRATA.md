@@ -1,6 +1,6 @@
 # Errata
 
-## 2026-10-02 — Nemotron-PII test set had 49 duplicate document ids
+## 2026-10-02 - Nemotron-PII test set had 49 duplicate document ids
 
 **What:** `data/processed/nemotron.jsonl` used `nemotron-<uid>` as the document id, but
 Nemotron-PII reuses each `uid` for a document's `us` and `intl` versions. 49 ids appeared

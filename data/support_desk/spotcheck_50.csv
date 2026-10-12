@@ -111,7 +111,7 @@ Regards,
 IT Department",,no PII,,,
 support_desk_300,sd-0150,agent_note,Cx passport GB [PASSPORTNUM: 123456789] used for international shipping customs form. Cx: [GIVENNAME: Arthur] [SURNAME: Penrose].,,country prefix not part of the number,,,
 support_desk_300,sd-0244,chat,can i speak to a human pls,,no PII,,,
-support_desk_300,sd-0286,agent_note,Called cx ([GIVENNAME: Lena] [SURNAME: Hoffmann]) — no answer. Left voicemail on [TELEPHONENUM: 0049 30 1234 5678]. Will retry tomorrow.,,international prefix 00,,,
+support_desk_300,sd-0286,agent_note,Called cx ([GIVENNAME: Lena] [SURNAME: Hoffmann]) - no answer. Left voicemail on [TELEPHONENUM: 0049 30 1234 5678]. Will retry tomorrow.,,international prefix 00,,,
 support_desk_300,sd-0122,email,"Dear Support,
 
 Please find attached the return form for order ORD-73302. The item code is HB-220-GRY and the return authorisation is RA-55190.
@@ -123,7 +123,7 @@ support_desk_300,sd-0257,agent_note,Duplicate charge refunded. Card used: Visa e
 support_desk_300,sd-0002,chat,"hey its [GIVENNAME: tom] [SURNAME: okafor] again, still waiting on the refund for SKU BX-2210-M. call me [TELEPHONENUM: 07700 900 123] pls, im free after 5",BX-2210-M,"lowercase name, spaced UK mobile, product code to keep",,,
 support_desk_300,sd-0144,email,"Dear Customer Service,
 
-I'm writing from [BUILDINGNUM: 2] [STREET: Rue de Rivoli], [CITY: Paris] [ZIPCODE: 75004] — can you ship to France? My name is [GIVENNAME: Isabelle] [SURNAME: Laurent].
+I'm writing from [BUILDINGNUM: 2] [STREET: Rue de Rivoli], [CITY: Paris] [ZIPCODE: 75004] - can you ship to France? My name is [GIVENNAME: Isabelle] [SURNAME: Laurent].
 
 Bien cordialement",,French address in English message,,,
 support_desk_300,sd-0015,agent_note,Cx refused to give DOB; could not verify. Advised to visit branch with photo ID. No changes made.,,no PII,,,

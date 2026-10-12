@@ -409,7 +409,7 @@ Branch `hyperparameter_optimization`. Each decision is written down before the n
   | Criterion | M4 | M5 | Result |
   | --- | ---: | ---: | --- |
   | Leakage < 5% | 27.65% | **4.57%** | pass |
-  | Leakage below M4, paired 95% CI excluding 0 | — | Δ −23.1 pt, CI [−32.5, −14.1] | pass |
+  | Leakage below M4, paired 95% CI excluding 0 | - | Δ −23.1 pt, CI [−32.5, −14.1] | pass |
   | Over-redaction Δ ≤ +1.0 pt, CI not entirely above 0 | 8.71% | 3.12%: Δ −5.6 pt, CI [−9.5, −2.4] | pass (lower) |
   | Loops: invented ≤ M4 + 2 pt, token limit ≤ M4 + 1 pt | 1/270 dropped, 0 truncated | 1/285 dropped, 0 truncated | pass |
 

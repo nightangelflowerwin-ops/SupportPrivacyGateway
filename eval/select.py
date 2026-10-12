@@ -133,7 +133,7 @@ def report(name: str, cands: list[Candidate], winner, why, primary, in_dist, san
         f"## Sweep: {name}",
         "",
         f"Primary: leakage on {' + '.join(primary)} (mean). Tie band {TIE} pt; tie-breaks: "
-        f"over-redaction, then leakage on {' + '.join(in_dist) or '—'}."
+        f"over-redaction, then leakage on {' + '.join(in_dist) or '-'}."
         + (
             f" Sanity rule on: dropped ≤ {100 * MAX_DROPPED:.0f}%, "
             f"token-limit ≤ {100 * MAX_TRUNCATED:.0f}%."
